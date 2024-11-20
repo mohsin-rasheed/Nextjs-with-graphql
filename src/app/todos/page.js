@@ -13,6 +13,7 @@ export default function TodosPage() {
   const [title, setTitle] = useState('');
   const [editTodoId, setEditTodoId] = useState(null); // Track which todo is being edited
   const [editTitle, setEditTitle] = useState('');
+  const [editDueDate, setEditDueDate] = useState('');
   const [completed, setCompleted] = useState(false); // Track completed status
   const [error, setError] = useState(null);
 
@@ -50,6 +51,7 @@ export default function TodosPage() {
         data: {
           title: editTitle, // Updated title
           completed: completed, // Updated completed status
+          dueDate:editDueDate,
         },
       });
   
@@ -77,6 +79,7 @@ export default function TodosPage() {
   const handleEditClick = (todo) => {
     setEditTodoId(todo.id);
     setEditTitle(todo.title);
+    setEditDueDate(todo.dueDate);
     setCompleted(todo.completed);
   };
 
@@ -100,6 +103,7 @@ export default function TodosPage() {
                     <tr>
                       <th>Title</th>
                       <th>Status</th>
+                      <th>DueDate</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -107,6 +111,7 @@ export default function TodosPage() {
                     <tr>
                       <th>Title</th>
                       <th>Status</th>
+                      <th>DueDate</th>
                       <th>Action</th>
                     </tr>
                   </tfoot>
@@ -115,10 +120,12 @@ export default function TodosPage() {
                       <tr key={todo.id}>
                         <td>{todo.title}</td>
                         <td> {todo.completed ? (
-          <span className="badge text-bg-success">Completed</span>
-        ) : (
-            <span className="badge text-bg-danger">Not Completed</span>
-        )}</td>
+                        <span className="badge text-bg-success">Completed</span>
+                          ) : (
+                              <span className="badge text-bg-danger">Not Completed</span>
+                          )}
+                        </td>
+                        <td>{todo.dueDate}</td>
                         <td>
                           <button
                             className="btn btn-warning m-1"
@@ -162,12 +169,23 @@ export default function TodosPage() {
                     </div>
                     <div className="form-floating mb-3">
                       <input
+                      type='date'
+                        className="form-control"
+                        placeholder="Edit todo dueDate"
+                        value={editDueDate}
+                        onChange={(e) => setEditDueDate(e.target.value)}
+                      />
+                      <label htmlFor="inputEmail">DueDate</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                      <input
                         
                         type="checkbox"
                         checked={completed}
                         onChange={() => setCompleted(!completed)}
                       />
-                      <label htmlFor="inputCheckbox">Completed</label>
+                     <label htmlFor="inputCheckbox" className='checkbox_label' style={{ padding: '0rem 0.75rem 0 0.90rem' }}>Completed</label>
+
                     </div>
                     <div className="d-flex align-items-end justify-content-end mt-4 mb-0">
                       <button type="submit" className="btn btn-primary pull-end">

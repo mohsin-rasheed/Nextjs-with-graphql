@@ -26,6 +26,7 @@ export const GET_TODOS = `
       id
       title
       completed
+      dueDate
     }
   }
 `;
@@ -47,6 +48,7 @@ export const UPDATE_TODO = `
       id
       title
       completed
+      dueDate
     }
   }
 `;

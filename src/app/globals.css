@@ -19,3 +19,6 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+.checkbox_label{
+  padding: 0rem 0.75rem 0 0.90rem;
+}
